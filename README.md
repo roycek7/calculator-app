@@ -1,5 +1,6 @@
-#SimpleCalculator
-##Steps
+# SimpleCalculator
+
+## Steps
 
 Run `pip install -r requirement.txt` to install all the libraries in the requirement file.
 
