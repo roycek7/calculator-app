@@ -38,9 +38,6 @@ def check_input(item):
     """
     try:
         return float(item) if isinstance(item, str) else item
-    except TypeError:
+    except Exception:
         traceback.print_exc()
-        logger.error('TypeError encountered as input')
-    except ValueError:
-        traceback.print_exc()
-        logger.error('ValueError encountered as input')
+        logger.error('Exception encountered as input')
