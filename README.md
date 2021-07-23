@@ -18,5 +18,3 @@ Final output in location `/binary_storage/submission.xlsx`.
 Test plan in location `tests/TestPlan/`.
 
 ER diagram in location `modules/calculator/ER/`.
-
-Comment out lines in `settings/options.py` config for unwanted operations.

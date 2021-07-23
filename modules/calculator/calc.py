@@ -1,11 +1,24 @@
 import traceback
 
+from modules.calculator.calc_helpers import AdditionOperationStrategy
+from modules.calculator.calc_helpers import DivisionOperationStrategy
+from modules.calculator.calc_helpers import ExponentiationOperationStrategy
+from modules.calculator.calc_helpers import MultiplicationOperationStrategy
+from modules.calculator.calc_helpers import SubtractionOperationStrategy
 from modules.calculator.utils.util import read_file, create_excel, check_input
 from modules.common.exception import ZeroDivisibleError
 from modules.common.http_message import http_message_information
-from settings.options import config, file_storage_path, logging, input_file
+from settings.options import file_storage_path, logging, input_file
 
 logger = logging.getLogger(__name__)
+
+PERMITTED_OPERATIONS = {
+    'addition': AdditionOperationStrategy(),
+    'subtraction': SubtractionOperationStrategy(),
+    'multiplication': MultiplicationOperationStrategy(),
+    'division': DivisionOperationStrategy(),
+    'exponentiation': ExponentiationOperationStrategy(),
+}
 
 
 class CalculatorStrategy:
@@ -19,15 +32,15 @@ class CalculatorStrategy:
     def get_result(self):
         """
         This function is responsible for getting the result according to the strategy. If parameters are missing
-        returns. Zero divisible error is handled which only throws an custom exception in the log and result
+        returns N/A. Zero divisible error is handled which only throws an custom exception in the log and results in
         Not Divisible. If any of the operation is not implemented it throws an KeyError with result Not Implemented.
-        Alphabet String exception in place of operand handled.
+        Alphabet String exception in place of operand handled by a broader exception.
         """
         if self.x and self.y is None:
             return 'N/A'
 
         try:
-            self.strategy = config[self.operation]
+            self.strategy = PERMITTED_OPERATIONS[self.operation.lower()]
             return self.strategy.create_operations(self.x, self.y)
         except ZeroDivisibleError:
             traceback.print_exc()
@@ -49,7 +62,7 @@ class ExecuteReportExcelFile:
         self.file = None
         self.results = []
 
-    def get_parameters(self):
+    def do_action(self):
         """
         This functions reads the rows of the file and passes the x, y, and operation parameters to get the result.
         Additionally, it prints out the log and finally calls a function to create new excel file.
