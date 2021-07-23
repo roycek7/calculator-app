@@ -49,6 +49,14 @@ class CalculatorStrategyTestCases(unittest.TestCase):
         res = CalculatorStrategy('SUBTRACTION', 's', 6)
         self.assertEqual(res.get_result(), 'N/A')
 
+    def test_missing_operand(self):
+        res = CalculatorStrategy('SUBTRACTION', '', '')
+        self.assertEqual(res.get_result(), 'N/A')
+
+    def test_missing_all(self):
+        res = CalculatorStrategy('', '', '')
+        self.assertEqual(res.get_result(), 'Not Implemented')
+
 
 # run the actual unittests
 unittest.main()
