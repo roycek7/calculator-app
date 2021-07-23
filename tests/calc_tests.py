@@ -10,7 +10,7 @@ from modules.calculator.calc import CalculatorStrategy
 class CalculatorStrategyTestCases(unittest.TestCase):
 
     def test_addition(self):
-        addition = CalculatorStrategy('addition', 5, 6)
+        addition = CalculatorStrategy('Addition', 5, 6)
         self.assertEqual(addition.get_result(), 11)
 
     def test_subtraction(self):
@@ -30,7 +30,7 @@ class CalculatorStrategyTestCases(unittest.TestCase):
         self.assertEqual(division.get_result(), 0.5)
 
     def test_exception(self):
-        division = CalculatorStrategy('division', 5, 0)
+        division = CalculatorStrategy('Division', 5, 0)
         self.assertEqual(division.get_result(), 'Not Divisible')
 
     def test_exponentiation(self):
