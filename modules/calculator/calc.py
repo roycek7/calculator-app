@@ -1,10 +1,7 @@
 import traceback
 
-from modules.calculator.calc_helpers import AdditionOperationStrategy
-from modules.calculator.calc_helpers import DivisionOperationStrategy
-from modules.calculator.calc_helpers import ExponentiationOperationStrategy
-from modules.calculator.calc_helpers import MultiplicationOperationStrategy
-from modules.calculator.calc_helpers import SubtractionOperationStrategy
+from modules.calculator.calc_helpers import AdditionOperationStrategy, SubtractionOperationStrategy, \
+    DivisionOperationStrategy, ExponentiationOperationStrategy, MultiplicationOperationStrategy
 from modules.calculator.utils.util import read_file, create_excel, check_input
 from modules.common.exception import ZeroDivisibleError
 from modules.common.http_message import http_message_information
