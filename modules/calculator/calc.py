@@ -3,7 +3,7 @@ import traceback
 
 from modules.calculator.calc_helpers import AdditionOperationStrategy, SubtractionOperationStrategy, \
     DivisionOperationStrategy, ExponentiationOperationStrategy, MultiplicationOperationStrategy
-from modules.calculator.utils.util import read_excel_file, create_excel_file, check_input
+from modules.calculator.utils.util import read_excel_file, create_excel_file, check_input, convert_result
 from modules.common.exception import ZeroDivisibleError, FileDoesNotExistsError, InternalServerError
 from modules.common.http_message import http_message_information
 from settings.options import file_storage_path, logging, input_file
@@ -62,7 +62,7 @@ class ExecuteReportExcelFile:
 
     def create_excel(self):
         """
-        creator of excel file
+        Function call to create excel file.
         """
         logger.info(f"Creating Submission Output in {file_storage_path}.")
         create_excel_file({'x': self.file['x'],
@@ -74,14 +74,14 @@ class ExecuteReportExcelFile:
     def do_action(self):
         """
         This functions reads the rows of the file and passes the x, y, and operation parameters to get the result.
-        Additionally, it prints out the log and finally calls a function to create new excel file.
+        Results are displayed upto 2 decimal places. Additionally, it prints out the log and finally calls a
+        function to create new excel file.
         """
         try:
             self.file = read_excel_file(input_file)
             for idx, row in self.file.iterrows():
                 calculator = CalculatorStrategy(row['operation'], row['x'], row['y'])
-                result = calculator.get_result()
-
+                result = convert_result(calculator.get_result())
                 self.results.append(result)
                 logger.info(f"Executed Row {idx + 1}, x: {row['x']}, y: {row['y']}, "
                             f"operation: {row['operation']}, result: {result}")

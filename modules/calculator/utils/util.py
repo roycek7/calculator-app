@@ -42,3 +42,17 @@ def check_input(item):
     except Exception:
         traceback.print_exc()
         logger.error('Exception encountered as input')
+
+
+def convert_result(result):
+    """
+    This function checks if the result is float and rounds it to 2 decimal place. For complex number it does the same,
+     both to the real and the imaginary. Else returns the strings.
+    """
+    if isinstance(result, float):
+        return round(result, 2)
+
+    if isinstance(result, complex):
+        return round(result.real, 2) + round(result.imag, 2) * 1j
+
+    return result
