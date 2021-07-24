@@ -6,7 +6,7 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 
-def read_file(data):
+def read_excel_file(data):
     """Read data from excel file.
 
     :param data:str, data in file
@@ -19,7 +19,7 @@ def read_file(data):
         raise e
 
 
-def create_excel(dataframe_dictionary, path):
+def create_excel_file(dataframe_dictionary, path):
     """
     Create a Pandas Excel writer using XlsxWriter as the engine. Convert the dataframe to an XlsxWriter Excel object.
     Close the Pandas Excel writer and output the Excel file.
