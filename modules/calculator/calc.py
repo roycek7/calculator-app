@@ -4,7 +4,7 @@ import traceback
 from modules.calculator.calc_helpers import AdditionOperationStrategy, SubtractionOperationStrategy, \
     DivisionOperationStrategy, ExponentiationOperationStrategy, MultiplicationOperationStrategy
 from modules.calculator.utils.util import read_excel_file, create_excel_file, check_input
-from modules.common.exception import ZeroDivisibleError
+from modules.common.exception import ZeroDivisibleError, FileDoesNotExistsError, InternalServerError
 from modules.common.http_message import http_message_information
 from settings.options import file_storage_path, logging, input_file
 
@@ -61,6 +61,9 @@ class ExecuteReportExcelFile:
         self.results = []
 
     def create_excel(self):
+        """
+        creator of excel file
+        """
         logger.info(f"Creating Submission Output in {file_storage_path}.")
         create_excel_file({'x': self.file['x'],
                            'y': self.file['y'],
@@ -86,10 +89,6 @@ class ExecuteReportExcelFile:
             self.create_excel()
             return http_message_information(201, 'Success: Check Binary Storage!!!')
         except FileNotFoundError:
-            traceback.print_exc()
-            logger.error("Input file not found.")
-            return http_message_information(404, '404 File Not Found!')
+            raise FileDoesNotExistsError
         except Exception:
-            traceback.print_exc()
-            logger.error("Something went wrong!")
-            return http_message_information(500, 'Internal Server Error!')
+            raise InternalServerError

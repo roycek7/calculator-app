@@ -1,9 +1,14 @@
 from flask import Flask
+from flask_restful import Api
 
-from modules.calculator.handlers import main
+from settings.routes import initialize_routes
+from modules.common.exception import errors
 
 app = Flask(__name__)
-app.register_blueprint(main)
+api = Api(app, errors=errors)
+
+initialize_routes(api)
+
 
 if __name__ == "__main__":
     app.run()
