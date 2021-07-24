@@ -42,15 +42,15 @@ class CalculatorStrategy:
             return self.strategy.create_operations(self.x, self.y)
         except ZeroDivisibleError:
             traceback.print_exc()
-            logger.warning(f"Exception handled.")
+            logger.warning("Exception handled.")
             return 'Not Divisible'
         except KeyError:
             traceback.print_exc()
-            logger.warning(f"Exception handled.")
+            logger.warning("Exception handled.")
             return 'Not Implemented'
         except Exception:
             traceback.print_exc()
-            logger.warning(f"Exception handled.")
+            logger.warning("Exception handled.")
             return 'N/A'
 
 
