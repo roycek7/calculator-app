@@ -2,6 +2,7 @@ import traceback
 
 import pandas as pd
 
+from modules.common.exception import ActionException
 from settings.config import logger
 
 
@@ -15,7 +16,7 @@ def read_excel_file(data):
         return pd.read_excel(data)
     except Exception as e:
         logger.info(f"Not able to read data. Error :- {e}")
-        raise e
+        raise ActionException(http_status_code=404, errors='File with the given location does not exists!')
 
 
 def create_excel_file(dataframe_dictionary, path):

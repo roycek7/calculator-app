@@ -1,7 +1,7 @@
 from settings.config import logger
 
 from modules.common.exception import ZeroDivisibleError
-from modules.calculator.base import OperationStrategy
+from modules.calculator.actions.base import OperationStrategy
 
 
 class AdditionOperationStrategy(OperationStrategy):

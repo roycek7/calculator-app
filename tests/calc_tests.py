@@ -4,7 +4,7 @@ import unittest
 
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from modules.calculator.calc import CalculatorStrategy
+from modules.calculator.actions.calculator_operator import CalculatorStrategy
 
 
 class CalculatorStrategyTestCases(unittest.TestCase):
