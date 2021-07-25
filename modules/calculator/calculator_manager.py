@@ -23,7 +23,10 @@ class ExecuteReportExcelFile:
 
     def iterate_file(self):
         """
-        Iterates over the rows in the file and sends it to the strategy class. Appends the results in list.
+        This functions reads the rows of the file and passes the x, y, and operation parameters to get the result.
+        Iterates over the rows in the file and sends it to the strategy class.
+        Results are displayed upto 2 decimal places. Finally, Appends the results in list.
+        Additionally, it prints out the log.
         """
         for idx, row in self.file.iterrows():
             calculator = CalculatorStrategy(row['operation'], row['x'], row['y'])
@@ -34,9 +37,7 @@ class ExecuteReportExcelFile:
 
     def do_action(self):
         """
-        This functions reads the rows of the file and passes the x, y, and operation parameters to get the result.
-        Results are displayed upto 2 decimal places. Additionally, it prints out the log and finally calls a
-        function to create new excel file.
+        Do action calls all the necessary function required for the process.
         """
         self.file = read_excel_file(input_file)
         self.iterate_file()
