@@ -20,6 +20,10 @@ class Config:
     """
     # Default settings
     FLASK_ENV = 'development'
+
+    HOST = '0.0.0.0'
+    PORT = 8080
+
     DEBUG = False
     TESTING = False
     WTF_CSRF_ENABLED = True
