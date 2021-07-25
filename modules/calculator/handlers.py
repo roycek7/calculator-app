@@ -8,5 +8,5 @@ class CalculatorHandler(Resource):
 
     def get(self):
         application = ExecuteReportExcelFile()
-        result = application.do_action()
-        return Response(result['message'], status=result['http_status_code'], mimetype='application/json')
+        http_status_code, message = application.do_action()
+        return Response(message, status=http_status_code, mimetype='application/json')

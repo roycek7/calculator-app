@@ -1,14 +1,13 @@
-import logging
 import traceback
 
 import pandas as pd
 
-logger = logging.getLogger(__name__)
+from settings.config import logger
 
 
 def read_excel_file(data):
-    """Read data from excel file.
-
+    """
+    Read data from excel file.
     :param data:str, data in file
     :return:str, data after reading excel file
     """
@@ -47,7 +46,7 @@ def check_input(item):
 def convert_result(result):
     """
     This function checks if the result is float and rounds it to 2 decimal place. For complex number it does the same,
-     both to the real and the imaginary. Else returns the strings.
+    both to the real and the imaginary. Else returns the strings.
     """
     if isinstance(result, float):
         return round(result, 2)

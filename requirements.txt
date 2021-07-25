@@ -3,3 +3,5 @@ openpyxl
 xlsxwriter
 flask
 flask_restful
+python-dotenv
+waitress

@@ -1,9 +1,7 @@
-import logging
+from settings.config import logger
 
 from modules.common.exception import ZeroDivisibleError
 from modules.calculator.base import OperationStrategy
-
-logger = logging.getLogger(__name__)
 
 
 class AdditionOperationStrategy(OperationStrategy):

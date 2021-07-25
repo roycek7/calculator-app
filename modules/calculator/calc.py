@@ -5,10 +5,8 @@ from modules.calculator.calc_helpers import AdditionOperationStrategy, Subtracti
     DivisionOperationStrategy, ExponentiationOperationStrategy, MultiplicationOperationStrategy
 from modules.calculator.utils.util import read_excel_file, create_excel_file, check_input, convert_result
 from modules.common.exception import ZeroDivisibleError, FileDoesNotExistsError, InternalServerError
-from modules.common.http_message import http_message_information
-from settings.options import file_storage_path, logging, input_file
-
-logger = logging.getLogger(__name__)
+from settings.config import logger
+from settings.options import file_storage_path, input_file
 
 PERMITTED_OPERATIONS = {
     'addition': AdditionOperationStrategy(),
@@ -87,7 +85,7 @@ class ExecuteReportExcelFile:
                             f"operation: {row['operation']}, result: {result}")
 
             self.create_excel()
-            return http_message_information(201, 'Success: Check Binary Storage!!!')
+            return 201, 'Success: Check Binary Storage!!!'
         except FileNotFoundError:
             raise FileDoesNotExistsError
         except Exception:

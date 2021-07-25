@@ -4,7 +4,7 @@
 
 Run `pip install -r requirement.txt` to install all the libraries in the requirement file.
 
-Run `python main.py`. Flask will open a port at http://127.0.0.1:5000/. Click the link to
+Run `python main.py`. Flask will open a port at http://0.0.0.0:8080/. Click the link to
 generate the xlsx file. 
 
 Check output in Binary Storage as `submission.xlsx`.
