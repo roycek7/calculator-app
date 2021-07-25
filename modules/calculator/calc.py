@@ -4,7 +4,7 @@ import traceback
 from modules.calculator.calc_helpers import AdditionOperationStrategy, SubtractionOperationStrategy, \
     DivisionOperationStrategy, ExponentiationOperationStrategy, MultiplicationOperationStrategy
 from modules.calculator.utils.util import read_excel_file, create_excel_file, check_input, convert_result
-from modules.common.exception import ZeroDivisibleError, FileDoesNotExistsError, InternalServerError
+from modules.common.exception import ZeroDivisibleError
 from settings.config import logger
 from settings.options import file_storage_path, input_file
 
@@ -69,6 +69,17 @@ class ExecuteReportExcelFile:
                            'result': self.results},
                           file_storage_path)
 
+    def iterate_file(self):
+        """
+        Iterates over the rows in the file and sends it to the strategy class. Appends the results in list.
+        """
+        for idx, row in self.file.iterrows():
+            calculator = CalculatorStrategy(row['operation'], row['x'], row['y'])
+            result = convert_result(calculator.get_result())
+            self.results.append(result)
+            logger.info(f"Executed Row {idx + 1}, x: {row['x']}, y: {row['y']}, "
+                        f"operation: {row['operation']}, result: {result}")
+
     def do_action(self):
         """
         This functions reads the rows of the file and passes the x, y, and operation parameters to get the result.
@@ -77,16 +88,10 @@ class ExecuteReportExcelFile:
         """
         try:
             self.file = read_excel_file(input_file)
-            for idx, row in self.file.iterrows():
-                calculator = CalculatorStrategy(row['operation'], row['x'], row['y'])
-                result = convert_result(calculator.get_result())
-                self.results.append(result)
-                logger.info(f"Executed Row {idx + 1}, x: {row['x']}, y: {row['y']}, "
-                            f"operation: {row['operation']}, result: {result}")
-
+            self.iterate_file()
             self.create_excel()
             return 201, 'Success: Check Binary Storage!!!'
         except FileNotFoundError:
-            raise FileDoesNotExistsError
+            return 400, "File with the given location doesn't exists"
         except Exception:
-            raise InternalServerError
+            return 500, "Something went wrong"

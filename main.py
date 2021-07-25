@@ -5,7 +5,6 @@ from flask import Flask
 from flask_restful import Api
 from waitress import serve
 
-from modules.common.error import errors
 from settings.config import logger
 from settings.routes import routes
 
@@ -13,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object(os.getenv('CONFIG_TYPE'))
 logger.info(f"Running {app.config['FLASK_ENV'].upper()} Server")
 
-api = Api(app, errors=errors)
+api = Api(app)
 
 routes(api)
 
