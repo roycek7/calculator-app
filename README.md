@@ -18,6 +18,6 @@ To run testcases `python tests/calc_tests.py`.
 
 Final output in location `/binary_storage/submission.xlsx`.
 
-Test plan in location `tests/TestPlan/`.
+Test plan in location `docs/calculator/TestPlan/`.
 
-ER diagram in location `modules/calculator/ER/`.
+ER diagram in location `docs/calculator/ER/`.
