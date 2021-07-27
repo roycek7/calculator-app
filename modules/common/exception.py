@@ -6,7 +6,9 @@ class ZeroDivisibleError(Exception):
 
 class ActionException(Exception):
     def __init__(self, errors=None, http_status_code=None, http_status_reason=None):
-
+        """
+        Custom exception with parameters that can be accessed as attributes.
+        """
         if not errors:
             errors = []
 

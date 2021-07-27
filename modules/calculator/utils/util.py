@@ -14,7 +14,7 @@ def read_excel_file(data):
     """
     try:
         return pd.read_excel(data)
-    except Exception as e:
+    except FileNotFoundError as e:
         logger.info(f"Not able to read data. Error :- {e}")
         raise ActionException(http_status_code=404, errors='File with the given location does not exists!')
 
