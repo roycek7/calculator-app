@@ -1,6 +1,7 @@
 import math
 import traceback
 
+from modules.calculator.actions.base import OperationStrategy
 from modules.calculator.actions.calculator_helpers import AdditionOperationStrategy, SubtractionOperationStrategy, \
     DivisionOperationStrategy, ExponentiationOperationStrategy, MultiplicationOperationStrategy
 from modules.calculator.utils.util import check_input
@@ -23,6 +24,7 @@ class CalculatorStrategy:
         self.x = check_input(x)
         self.y = check_input(y)
         self.operation = operation
+        self.strategy = OperationStrategy
 
     def get_result(self):
         """
