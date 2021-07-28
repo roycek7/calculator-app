@@ -4,6 +4,7 @@ import pandas as pd
 
 from modules.common.exception import ActionException
 from settings.config import logger
+from settings.options import columns
 
 
 def read_excel_file(data):
@@ -13,7 +14,11 @@ def read_excel_file(data):
     :return:str, data after reading excel file
     """
     try:
-        return pd.read_excel(data)
+        file = pd.read_excel(data)
+        for col in columns:
+            if col not in file.columns:
+                raise ActionException(http_status_code=404, errors='Excel format mismatch.')
+        return file
     except FileNotFoundError as e:
         logger.info(f"Not able to read data. Error :- {e}")
         raise ActionException(http_status_code=404, errors='File with the given location does not exists!')
